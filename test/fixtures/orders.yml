@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  additional_info: MyString
+  order_note: MyString
+  delivery_note: MyString
+  delivery_date: 2022-05-11
+  order_number: MyString
+  delivery_cost: 1
+  subtotal: 1
+  total: 1
+
+two:
+  additional_info: MyString
+  order_note: MyString
+  delivery_note: MyString
+  delivery_date: 2022-05-11
+  order_number: MyString
+  delivery_cost: 1
+  subtotal: 1
+  total: 1

@@ -1,0 +1,57 @@
+<%= form_with(model: order) do |form| %>
+  <% if order.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+        <% order.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :additional_info, style: "display: block" %>
+    <%= form.text_field :additional_info %>
+  </div>
+
+  <div>
+    <%= form.label :order_note, style: "display: block" %>
+    <%= form.text_field :order_note %>
+  </div>
+
+  <div>
+    <%= form.label :delivery_note, style: "display: block" %>
+    <%= form.text_field :delivery_note %>
+  </div>
+
+  <div>
+    <%= form.label :delivery_date, style: "display: block" %>
+    <%= form.date_field :delivery_date %>
+  </div>
+
+  <div>
+    <%= form.label :order_number, style: "display: block" %>
+    <%= form.text_field :order_number %>
+  </div>
+
+  <div>
+    <%= form.label :delivery_cost, style: "display: block" %>
+    <%= form.number_field :delivery_cost %>
+  </div>
+
+  <div>
+    <%= form.label :subtotal, style: "display: block" %>
+    <%= form.number_field :subtotal %>
+  </div>
+
+  <div>
+    <%= form.label :total, style: "display: block" %>
+    <%= form.number_field :total %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

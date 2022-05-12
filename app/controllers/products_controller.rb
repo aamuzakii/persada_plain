@@ -1,10 +1,11 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
+  include CurrencyHelper
 
   # GET /products or /products.json
   def index
-    @products = Product.all
-    render :json => @products
+    products = Product.all
+    render :json => decorate_product_list(products)
   end
 
   # GET /products/1 or /products/1.json
@@ -67,5 +68,15 @@ class ProductsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def product_params
       params.require(:product).permit(:name, :image_url, :description, :category, :price, :stock_type)
+    end
+
+    def decorate_product_list(raw)
+      raw.map do |item|
+        {
+          name: item.name,
+          price: get_formatted_price(item.price),
+          image_url: item.image_url
+        }
+      end
     end
 end

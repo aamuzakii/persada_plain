@@ -4,10 +4,26 @@ class CategoriesController < ApplicationController
   # GET /categories or /categories.json
   def index
     @categories = Category.all
+    render :json => @categories
   end
 
   # GET /categories/1 or /categories/1.json
   def show
+  end
+
+  def products_and_category
+
+    result = {}
+    categories = Category.all
+    categories.map do | category |
+      result[category.id] = {
+        name: category.name,
+        inside: category.products.all,
+        count: category.products.count
+      }
+    end
+
+    render :json => result
   end
 
   # GET /categories/new

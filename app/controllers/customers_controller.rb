@@ -4,6 +4,7 @@ class CustomersController < ApplicationController
   # GET /customers or /customers.json
   def index
     @customers = Customer.all
+    render :json => @customers
   end
 
   # GET /customers/1 or /customers/1.json

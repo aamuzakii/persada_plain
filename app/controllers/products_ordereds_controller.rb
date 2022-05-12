@@ -4,6 +4,7 @@ class ProductsOrderedsController < ApplicationController
   # GET /products_ordereds or /products_ordereds.json
   def index
     @products_ordereds = ProductsOrdered.all
+    render :json => @products_ordereds
   end
 
   # GET /products_ordereds/1 or /products_ordereds/1.json

@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   # GET /orders or /orders.json
   def index
     @orders = Order.all
-    render :json => @orders
+    # render :json => @orders
   end
 
   # GET /orders/1 or /orders/1.json
@@ -23,6 +23,12 @@ class OrdersController < ApplicationController
   # POST /orders or /orders.json
   def create
     @order = Order.new(order_params)
+    # @products_ordereds = @order.products_ordereds.create(
+    #   qty_ordered: 'foo',
+    #   sku: 'foo',
+    #   name: 'foo',
+    #   price: 'foo'
+    # )
 
     respond_to do |format|
       if @order.save

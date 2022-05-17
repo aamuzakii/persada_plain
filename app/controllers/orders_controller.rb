@@ -22,21 +22,28 @@ class OrdersController < ApplicationController
 
   # POST /orders or /orders.json
   def create
-    @order = Order.new(order_params)
-    # @products_ordereds = @order.products_ordereds.create(
-    #   qty_ordered: 'foo',
-    #   sku: 'foo',
-    #   name: 'foo',
-    #   price: 'foo'
-    # )
+    
+    @order = Order.new(
+      additional_info: params['information']['additional_info'],
+      order_note: params['information']['order_note'],
+      delivery_note: params['information']['delivery_note'],
+      delivery_date: params['information']['delivery_date'],
+      order_number: params['information']['order_number'],
+      status: params['information']['status'],
+      delivery_cost: params['information']['delivery_cost'],
+      subtotal: params['information']['subtotal'],
+      total: params['information']['total'],
+    )
 
-    respond_to do |format|
-      if @order.save
-        format.html { redirect_to order_url(@order), notice: "Order was successfully created." }
-        format.json { render :show, status: :created, location: @order }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
+    if @order.save
+      params['items'].each do |item|
+        @products_ordereds = @order.products_ordereds.create(
+          qty: item['qty'],
+          sku: item['sku'],
+          name: item['name'],
+          price: item['int_price']
+        )
+        @products_ordereds.save
       end
     end
   end
@@ -71,7 +78,7 @@ class OrdersController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
-    def order_params
-      params.require(:order).permit(:additional_info, :order_note, :delivery_note, :delivery_date, :order_number, :delivery_cost, :subtotal, :total)
-    end
+    # def order_params
+    #   params.require(:order).permit(:additional_info, :order_note, :delivery_note, :delivery_date, :order_number, :delivery_cost, :subtotal, :total)
+    # end
 end

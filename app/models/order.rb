@@ -14,4 +14,5 @@ class Order
   # https://www.mongodb.com/community/forums/t/how-would-you-model-this-database/12184
 
   has_many :products_ordereds
+  belongs_to :customer
 end

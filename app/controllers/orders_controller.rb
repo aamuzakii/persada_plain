@@ -9,7 +9,11 @@ class OrdersController < ApplicationController
 
   def index_by_status
     
-    result = Order.where({ status: params['status'] })
+    if params['status'] == 'all'
+      result = Order.all
+    else
+      result = Order.where({ status: params['status'] })
+    end
 
     render :json => decorate_orders_index(result)
   end

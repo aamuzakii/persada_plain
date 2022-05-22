@@ -1,0 +1,15 @@
+Error: Unable to resolve dependency: user requested 'executable-hooks (= 1.6.1)' (Gem::UnsatisfiableDependencyError)
+solution: repeat bundle using command bundle install --deployment --without development test
+
+
+About getting SSL:
+524  sudo certbot certonly --standalone
+526  cat Passengerfile.json.ssl 
+527  sudo lsof -t -i:80
+528  sudo kill -9 190897
+531  mv Passengerfile.json Passengerfile.json.http
+532  mv Passengerfile.json.ssl Passengerfile.json
+533  rvmsudo passenger start -e production
+534  openssl
+535  openssl dhparam -out /var/www/plain/code/dhparam.pem 2048
+536  cd /var/run/passenger-instreg

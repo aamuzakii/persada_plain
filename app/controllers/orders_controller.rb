@@ -7,6 +7,13 @@ class OrdersController < ApplicationController
     # render :json => @orders
   end
 
+  def index_by_status
+    
+    result = Order.where({ status: params['status'] })
+
+    render :json => decorate_orders_index(result)
+  end
+
   # GET /orders/1 or /orders/1.json
   def show
   end
@@ -76,6 +83,24 @@ class OrdersController < ApplicationController
     def set_order
       @order = Order.find(params[:id])
     end
+
+    def decorate_orders_index(raw)
+      raw.map do |item|
+        {
+          additional_info: item.additional_info, 
+          order_note: item.order_note, 
+          delivery_note: item.delivery_note, 
+          delivery_date: item.delivery_date, 
+          order_number: item.order_number, 
+          status: item.status, 
+          delivery_cost: item.delivery_cost, 
+          subtotal: item.subtotal, 
+          total: item.total,
+          products_ordereds: item.products_ordereds
+        }
+      end
+    end
+
 
     # Only allow a list of trusted parameters through.
     # def order_params

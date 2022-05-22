@@ -7,5 +7,5 @@ class Product
   field :price, type: Integer
   field :stock_type, type: String
 
-  belongs_to :category
+  belongs_to :category, optional: true
 end

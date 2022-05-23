@@ -55,6 +55,8 @@ class OrdersController < ApplicationController
           price: item['int_price']
         )
         @products_ordereds.save
+
+        render :json => { code: 201, message: 'Order created' }
       end
     end
   end

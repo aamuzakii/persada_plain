@@ -34,7 +34,7 @@ class ProductsController < ApplicationController
 
     @product.save
     
-
+    render :json => { code: 201, message: 'New Product created' }
   end
 
   # PATCH/PUT /products/1 or /products/1.json

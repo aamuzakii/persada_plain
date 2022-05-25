@@ -1,6 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, :authorize_request, only: %i[ show edit update destroy ]
-  before_action :authorize_request
+  before_action :set_product, only: %i[ show edit update destroy ]
   include CurrencyHelper
 
   # GET /products or /products.json

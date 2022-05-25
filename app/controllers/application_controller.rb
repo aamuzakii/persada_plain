@@ -5,14 +5,10 @@ class ApplicationController < ActionController::Base
   after_action :cors_set_access_control_headers
 
   def authorize_request
-    
-    
-    
     token = request.cookies['token']
     begin
-      @decoded = JsonWebToken.decode(token)
-      binding.pry
-      # @current_user = User.find(@decoded[:user_id])
+      decoded = JsonWebToken.decode(token)
+      @current_user = Customer.find(decoded[:user_id])
     rescue
     end
   end

@@ -44,6 +44,7 @@ gem 'pry', '~> 0.13.1'
 gem 'rack-cors'
 gem 'money'
 gem 'vonage'
+gem 'jwt'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

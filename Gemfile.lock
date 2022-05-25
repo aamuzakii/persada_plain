@@ -246,6 +246,7 @@ DEPENDENCIES
   debug
   importmap-rails
   jbuilder
+  jwt
   money
   mongoid
   passenger

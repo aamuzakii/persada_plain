@@ -1,9 +1,13 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: %i[ show edit update destroy ]
+  before_action :set_product, :authorize_request, only: %i[ show edit update destroy ]
+  before_action :authorize_request
   include CurrencyHelper
 
   # GET /products or /products.json
   def index
+    
+    request.cookies['token']
+    
     products = Product.all
     render :json => decorate_product_list(products)
   end

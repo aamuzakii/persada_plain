@@ -43,9 +43,10 @@ class OrdersController < ApplicationController
       status: params['information']['status'],
       delivery_cost: params['information']['delivery_cost'],
       subtotal: params['information']['subtotal'],
-      total: params['information']['total'],
+      # total: params['information']['total'],
     )
 
+    total = 0
     if @order.save
       params['items'].each do |item|
         @products_ordereds = @order.products_ordereds.create(
@@ -55,6 +56,7 @@ class OrdersController < ApplicationController
           price: item['int_price']
         )
         @products_ordereds.save
+        total = total + (item['int_price'] * item['qty'])
 
         render :json => { code: 201, message: 'Order created' }
       end

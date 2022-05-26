@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: %i[ show edit update destroy ]
-  before_action :authorize_request, only: [:create]
+  before_action :authorize_request, except: []
 
   # GET /orders or /orders.json
   def index
@@ -9,11 +9,15 @@ class OrdersController < ApplicationController
   end
 
   def index_by_status
+
+    puts "================="
+    puts "#{@current_user.name}"
+    puts "================="
     
     if params['status'] == 'all'
-      result = Order.all
+      result = Order.where({ customer: @current_user })
     else
-      result = Order.where({ status: params['status'] })
+      result = Order.where({ status: params['status'], customer: @current_user })
     end
 
     render :json => decorate_orders_index(result)

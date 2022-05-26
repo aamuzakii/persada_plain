@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   skip_before_action :verify_authenticity_token
 
   def authorize_request
-    token = request.cookies['token']
+    token = request.headers["Authorization"]
     begin
       decoded = JsonWebToken.decode(token)
       @current_user = Customer.find(decoded[:user_id])

@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   # def cors_set_access_control_headers
-  #   headers['Access-Control-Allow-Origin'] = 'http://localhost:8000'
+  #   headers['Access-Control-Allow-Origin'] = 'https://www.dev.persada.store/'
   #   headers['Access-Control-Allow-Methods'] = 'POST, PUT, DELETE, GET'
   #   headers['Access-Control-Request-Method'] = '*'
   #   headers['Access-Control-Allow-Credentials'] = 'true'

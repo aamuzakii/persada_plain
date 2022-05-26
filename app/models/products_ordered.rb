@@ -5,6 +5,7 @@ class ProductsOrdered
   field :sku, type: String
   field :name, type: String
   field :price, type: Integer
+  field :image_url, type: String
 
   belongs_to :order
 end

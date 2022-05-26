@@ -58,7 +58,8 @@ class OrdersController < ApplicationController
           qty: item['qty'],
           sku: item['sku'],
           name: item['name'],
-          price: item['int_price']
+          price: item['int_price'],
+          image_url: item['image_url']
         )
         @products_ordereds.save
         total = total + (item['int_price'] * item['qty'])
@@ -112,7 +113,8 @@ class OrdersController < ApplicationController
           delivery_cost: item.delivery_cost, 
           subtotal: item.subtotal, 
           total: item.total,
-          products_ordereds: item.products_ordereds
+          products_ordereds: item.products_ordereds,
+          order_date: item.created_at.strftime("%d %b %Y, %I:%M %p")
         }
       end
     end

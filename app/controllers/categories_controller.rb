@@ -4,7 +4,7 @@ class CategoriesController < ApplicationController
   # GET /categories or /categories.json
   def index
     @categories = Category.all
-    render :json => @categories
+    render :json => decorate(@categories)
   end
 
   # GET /categories/1 or /categories/1.json
@@ -83,4 +83,14 @@ class CategoriesController < ApplicationController
     def category_params
       params.require(:category).permit(:name)
     end
+
+    def decorate(raw)
+      raw.map do |item|
+        {
+          name: item.name,
+          id: item.id.to_s, 
+        }
+      end
+    end
+
 end

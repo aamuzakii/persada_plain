@@ -11,13 +11,21 @@ class OrdersController < ApplicationController
   def index_by_status
 
     puts "================="
-    puts "#{@current_user.name}"
+    puts "#{@current_user.access_type}"
     puts "================="
     
-    if params['status'] == 'all'
-      result = Order.where({ customer: @current_user })
+    if @current_user.access_type == 'seller'
+      if params['status'] == 'all'
+        result = Order.all
+      else
+        result = Order.where({ status: params['status'] })
+      end
     else
-      result = Order.where({ status: params['status'], customer: @current_user })
+      if params['status'] == 'all'
+        result = Order.where({ customer: @current_user })
+      else
+        result = Order.where({ status: params['status'], customer: @current_user })
+      end
     end
 
     render :json => decorate_orders_index(result)
@@ -107,6 +115,11 @@ class OrdersController < ApplicationController
 
     def decorate_orders_index(raw)
       raw.map do |item|
+
+        customer_info = Hash.new
+        customer_info['id'] = item.customer.id.to_s
+        customer_info['name'] = item.customer.name
+
         {
           additional_info: item.additional_info, 
           order_note: item.order_note, 
@@ -118,7 +131,8 @@ class OrdersController < ApplicationController
           subtotal: item.subtotal, 
           total: item.total,
           products_ordereds: item.products_ordereds,
-          order_date: item.created_at.strftime("%d %b %Y, %I:%M %p")
+          order_date: item.created_at.strftime("%d %b %Y, %I:%M %p"),
+          customer_info: customer_info
         }
       end
     end

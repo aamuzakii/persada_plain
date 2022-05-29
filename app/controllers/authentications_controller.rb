@@ -11,7 +11,7 @@ class AuthenticationsController < ApplicationController
 
   def request_otp
     
-    if ['000','111'].include?(params['phone'])
+    if ['000','111','6283894588105'].include?(params['phone'])
       
       customer = Customer.find_by(phone: params['phone']) # harusnya find_or_create ga sih
       token = generate_token(customer.id.to_s)

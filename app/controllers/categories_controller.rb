@@ -89,6 +89,7 @@ class CategoriesController < ApplicationController
         {
           name: item.name,
           id: item.id.to_s, 
+          qty_inside: item.products.count
         }
       end
     end

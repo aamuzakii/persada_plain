@@ -81,7 +81,8 @@ class ProductsController < ApplicationController
           price: get_formatted_price(item.price),
           int_price: item.price,
           image_url: item.image_url,
-          id: item.id.to_s
+          id: item.id.to_s,
+          category: item.category_id.to_s
         }
       end
     end

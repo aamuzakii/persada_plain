@@ -10,6 +10,8 @@ class OrdersController < ApplicationController
 
   def index_by_status
 
+    return render :json => { message: "no login user" } unless @current_user.present?
+
     puts "================="
     puts "#{@current_user.access_type}"
     puts "================="

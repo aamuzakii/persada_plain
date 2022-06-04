@@ -22,9 +22,37 @@ class AuthenticationsController < ApplicationController
     end
   end
 
+  def google_login
+    customer = Customer.find_by(email: params['profileObj']['email'])
+    if customer.present?
+      puts "email already exist"
+      give_access(customer)
+    else
+      puts "new email"
+      customer = Customer.new({
+        name: params['profileObj']['name'],
+        email: params['profileObj']['email'],
+        access_type: 'buyer',
+        pofile_photo: params['profileObj']['imageUrl'],
+        google_id: params['profileObj']['googleId'],
+      })
+      customer.save
+      puts "giving access.."
+      give_access(customer)
+    end
+
+  end
+
+  private
+
   def generate_token(user_id)
     token = JsonWebToken.encode(user_id: user_id)
   end
 
+  def give_access(customer)
+    token = generate_token(customer.id.to_s)
+    exp = Time.now + 6.months.to_i
+    render json: { token: token, exp: exp.strftime("%m-%d-%Y %H:%M"), username: customer.name }, status: :ok
+  end
 
 end

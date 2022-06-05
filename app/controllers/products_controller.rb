@@ -76,13 +76,21 @@ class ProductsController < ApplicationController
 
     def decorate_product_list(raw)
       raw.map do |item|
+
+        category = Hash.new
+
+        if item.category.present?
+          category['id'] = item.category_id.to_s
+          category['name'] = item.category.name
+        end
+
         {
           name: item.name,
           price: get_formatted_price(item.price),
           int_price: item.price,
           image_url: item.image_url,
           id: item.id.to_s,
-          category: item.category_id.to_s
+          category: category
         }
       end
     end

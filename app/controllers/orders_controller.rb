@@ -83,6 +83,9 @@ class OrdersController < ApplicationController
       @order.total = total
       @order.save
       render :json => { code: 201, message: 'Order created' }
+    else
+      Rails.logger.error "!!!!!!!!!!!!!!!!!!!#{@order.errors.messages}!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+      render :json => { code: 500, message: @order.errors.messages }
     end
   end
 

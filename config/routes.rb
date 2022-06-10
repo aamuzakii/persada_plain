@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     post 'post_otp', on: :collection
     post 'request_otp', on: :collection
     post 'google_login', on: :collection
+    post 'password_login', on: :collection
   end
 
   get 'products_and_category', to: 'categories#products_and_category'

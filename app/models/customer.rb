@@ -3,6 +3,7 @@ class Customer
   include Mongoid::Timestamps
   field :name, type: String
   field :email, type: String
+  field :password, type: String
   field :phone, type: String
   field :manual_address, type: String
   field :access_type, type: String

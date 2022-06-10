@@ -35,6 +35,14 @@ class OrdersController < ApplicationController
 
   # GET /orders/1 or /orders/1.json
   def show
+    order = Order.includes(:products_ordereds).find_by(order_number: params['id'])
+    
+    # binding.pry
+    puts "\n"
+    puts decorate_show(order)
+    puts "\n"
+    
+    render :json => decorate_show(order)
   end
 
   # GET /orders/new
@@ -82,7 +90,7 @@ class OrdersController < ApplicationController
 
       @order.total = total
       @order.save
-      render :json => { code: 201, message: 'Order created' }
+      render :json => { code: 201, message: 'Order created', data: { order_number: order_number } }
     else
       Rails.logger.error "!!!!!!!!!!!!!!!!!!!#{@order.errors.messages}!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
       render :json => { code: 500, message: @order.errors.messages }
@@ -142,9 +150,13 @@ class OrdersController < ApplicationController
       end
     end
 
+    def decorate_show(item)
+      {
+        order_number: item.order_number,
+        products: item.products_ordereds,
+        status: item.status,
+      }
+    end
 
-    # Only allow a list of trusted parameters through.
-    # def order_params
-    #   params.require(:order).permit(:additional_info, :order_note, :delivery_note, :delivery_date, :order_number, :delivery_cost, :subtotal, :total)
-    # end
+
 end

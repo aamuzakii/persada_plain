@@ -43,6 +43,21 @@ class AuthenticationsController < ApplicationController
 
   end
 
+  def password_login
+    customer = Customer.find_by(email: params['email'])
+    if customer.present?
+      match = customer.password == params['password']
+      if match
+        give_access(customer)
+      else
+        render json: { status: 401, message: 'wrong password' }
+      end
+    else
+      render json: { status: 404, message: 'wrong email' }
+    end
+  end
+  
+
   private
 
   def generate_token(user_id)

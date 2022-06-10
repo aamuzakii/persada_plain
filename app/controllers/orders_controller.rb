@@ -180,58 +180,6 @@ class OrdersController < ApplicationController
       }
     end
 
-    def generate_pdf_file()
-        prescription_attributes = { foo: 'bar' }
-        
-        pdf_file = ''
-        begin
-          
-            # pdf_html = ActionController::Base.new.render_to_string(
-            #     :template => "orders/pdf_template",
-            #     :locals => {
-            #             :@prescription => prescription_attributes
-            #         },
-            #     :layout => 'pdf'
-            #     )
-
-                doc_pdf = WickedPdf.new.pdf_from_string(
-                  ActionController::Base.new().render_to_string(
-                    template: "orders/pdf_template",            # <- this is the location of the PDF template.
-                    # layout:   "layouts/pdf.html.erb", # <- layout used for PDF files.
-                    # locals:   { x: "example" }        # <- any local variables in template.
-                  ),
-                  pdf:         "Document Name",
-                  page_size:   "Letter",
-                  orientation: "Landscape",
-                  margin: { top:    "0.5in",
-                            bottom: "0.5in",
-                            left:   "0.5in",
-                            right:  "0.5in" },
-                  disposition: "attachment"
-                )
-            
-            binding.pry
-            
-
-            pdf = WickedPdf.new.pdf_from_string(pdf_html)
-            file_name = "12112.pdf"
-            path = "/tmp/"
-            unless File.directory?(path)
-                FileUtils.mkdir_p(path)
-            end
-            file_path = path + file_name
-            File.open(file_path, 'wb'){|file| file << pdf }
-
-            alo_storage = AloStorage.new
-            pdf_file = alo_storage.upload(file_name, file_path, "prescription/#{prescription_attributes[:pharmacy][:name].parameterize}")
-            File.delete(file_path) if File.exist?(file_path)
-        rescue Exception => e
-            Rails.logger.info "GENERATE PDF FAILED : #{e}"
-        end
-
-        pdf_file
-    end
-
     def export
     
       body_html   = render_to_string( template: "orders/pdf_template" )
@@ -241,14 +189,15 @@ class OrdersController < ApplicationController
                                             margin: { bottom: 20, top: 30 } )
     
       
-      binding.pry
-
-      file_name = "12112.pdf"
-      path = "/home/alo-abdullahalmuzaki/"
+      file_name = "sample.pdf"
+      path = "/tmp/"
       unless File.directory?(path)
           FileUtils.mkdir_p(path)
       end
       file_path = path + file_name
       File.open(file_path, 'wb'){|file| file << pdf }
+
+      Cloudinary::Uploader.upload("/tmp/sample.pdf")
+      File.delete(file_path) if File.exist?(file_path)
     end
 end

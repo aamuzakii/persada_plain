@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :orders do
     get 'index_by_status', on: :collection
+    get 'create_pdf', on: :collection
   end
 
   resources :authentications do

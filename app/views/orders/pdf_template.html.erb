@@ -1,0 +1,81 @@
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+</style>
+
+<!-- start email container -->
+<div class="email_body" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;width: 100%;height: 100%;">
+  <div class="email_container" style="box-sizing: border-box;margin: 0 auto;padding: 16px;border: 0;font-size: 16px;font-family: 'Lato', sans-serif, arial;width: 100%;min-width: 495px;color: #7f7f7f;line-height: 28px;background-color: #ffffff;word-break: break-word;">
+
+    <div class="email_header mb_16" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;border-bottom: solid 2px #3570d2;display: table;width: 100%;padding-bottom: 16px;margin-bottom: 16px;">
+      <div class="header_col_8" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;">
+        <img src="https://res.cloudinary.com/dk0z4ums3/image/upload/v1603696808/setting/1603696807.png" alt="alodokter" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;vertical-align: top;max-width: 200px;display: inline-block;">
+      </div>
+      <div class="header_col_4" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;margin-left: auto;text-align: right;">
+        <img src="http://res.cloudinary.com/dk0z4ums3/image/upload/v1603256765/setting/1603256764.png" alt="alodokter" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;max-width: 32px;vertical-align: top;display: inline-block;">
+      </div>
+    </div>
+
+    <div class="email_row mb_6" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table;width: 100%;margin-bottom: 6px;">
+      <div class="col_4 color_424242 font_weight_700" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;width: 32%;color: #424242;font-weight: 700;">
+        Nama Dokter
+      </div>
+      <div class="col_8 color_424242 text_right" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;width: 72%;color: #424242;text-align: right;">
+        <%
+=begin%>
+ <%=@prescription[:doctor].firstname%> <%=@prescription[:doctor].lastname%> 
+<%
+=end%>
+      </div>
+    </div>
+    <div class="email_row" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table;width: 100%;">
+      <div class="col_4 color_424242 font_weight_700" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;width: 32%;color: #424242;font-weight: 700;">
+        Nomor SIP
+      </div>
+      <div class="col_8 color_424242 text_right" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;width: 72%;color: #424242;text-align: right;">
+      </div>
+    </div>
+
+    <hr style="box-sizing: border-box;margin-top: 16px;margin-bottom: 16px;border: 0;border-top: 1px solid #3570d2;font-family: 'Lato', sans-serif, arial;line-height: 28px;">
+
+    <div class="email_row mb_16" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table;width: 100%;margin-bottom: 16px;">
+      <div class="col_6 font_size_16 font_weight_700 color_424242" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: 18px;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;color: #424242;font-weight: 700;">
+        R/
+      </div>
+      <div class="col_6 text_right" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;text-align: right;">
+      </div>
+    </div>
+
+    <div class="email_row mb_16" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table;width: 100%;margin-bottom: 16px;">
+    </div>
+
+    <hr style="box-sizing: border-box;margin-top: 16px;margin-bottom: 16px;border: 0;border-top: 1px solid #3570d2;font-family: 'Lato', sans-serif, arial;line-height: 28px;">
+
+    <div class="email_row mb_6" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table;width: 100%;margin-bottom: 6px;">
+      <div class="col_4 color_424242 font_weight_700" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;width: 32%;color: #424242;font-weight: 700;">
+        Nama Pasien
+      </div>
+    </div>
+    <div class="email_row mb_6" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table;width: 100%;margin-bottom: 6px;">
+      <div class="col_4 color_424242 font_weight_700" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;width: 32%;color: #424242;font-weight: 700;">
+        Jenis Kelamin
+      </div>
+    </div>
+    <div class="email_row" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table;width: 100%;">
+      <div class="col_4 color_424242 font_weight_700" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;width: 32%;color: #424242;font-weight: 700;">
+        Usia
+      </div>
+    </div>
+
+    <hr class="hr_grey" style="box-sizing: border-box;margin-top: 16px;margin-bottom: 16px;border: 0;border-top: 1px solid #3570d2;font-family: 'Lato', sans-serif, arial;line-height: 28px;border-color: #ECECEC;">
+
+    <div class="email_row" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table;width: 100%;">
+      <div class="footer_col_8" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;width: 72%;">
+        Berlaku 1 kali pemakaian sampai tanggal
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- end email container -->

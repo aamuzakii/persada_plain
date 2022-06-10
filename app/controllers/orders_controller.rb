@@ -41,8 +41,15 @@ class OrdersController < ApplicationController
     puts "\n"
     puts decorate_show(order)
     puts "\n"
+    @order = Order.first
     
-    render :json => decorate_show(order)
+    # render :json => decorate_show(order)
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "file_name", template: "orders/show", formats: [:html]
+      end
+    end
   end
 
   # GET /orders/new
@@ -120,6 +127,21 @@ class OrdersController < ApplicationController
     end
   end
 
+  def create_pdf
+    @order = Order.first
+    export()
+    respond_to do |format|
+      format.html
+      format.pdf do
+        
+        binding.pry
+        
+        # render pdf: "file_name", template: "orders/show.html.erb"   # Excluding ".pdf" extension.
+        render save_to_file:                   Rails.root.join('pdfs', "foo.pdf")
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
@@ -158,5 +180,75 @@ class OrdersController < ApplicationController
       }
     end
 
+    def generate_pdf_file()
+        prescription_attributes = { foo: 'bar' }
+        
+        pdf_file = ''
+        begin
+          
+            # pdf_html = ActionController::Base.new.render_to_string(
+            #     :template => "orders/pdf_template",
+            #     :locals => {
+            #             :@prescription => prescription_attributes
+            #         },
+            #     :layout => 'pdf'
+            #     )
 
+                doc_pdf = WickedPdf.new.pdf_from_string(
+                  ActionController::Base.new().render_to_string(
+                    template: "orders/pdf_template",            # <- this is the location of the PDF template.
+                    # layout:   "layouts/pdf.html.erb", # <- layout used for PDF files.
+                    # locals:   { x: "example" }        # <- any local variables in template.
+                  ),
+                  pdf:         "Document Name",
+                  page_size:   "Letter",
+                  orientation: "Landscape",
+                  margin: { top:    "0.5in",
+                            bottom: "0.5in",
+                            left:   "0.5in",
+                            right:  "0.5in" },
+                  disposition: "attachment"
+                )
+            
+            binding.pry
+            
+
+            pdf = WickedPdf.new.pdf_from_string(pdf_html)
+            file_name = "12112.pdf"
+            path = "/tmp/"
+            unless File.directory?(path)
+                FileUtils.mkdir_p(path)
+            end
+            file_path = path + file_name
+            File.open(file_path, 'wb'){|file| file << pdf }
+
+            alo_storage = AloStorage.new
+            pdf_file = alo_storage.upload(file_name, file_path, "prescription/#{prescription_attributes[:pharmacy][:name].parameterize}")
+            File.delete(file_path) if File.exist?(file_path)
+        rescue Exception => e
+            Rails.logger.info "GENERATE PDF FAILED : #{e}"
+        end
+
+        pdf_file
+    end
+
+    def export
+    
+      body_html   = render_to_string( template: "orders/pdf_template" )
+    
+      pdf = WickedPdf.new.pdf_from_string( body_html,
+                                            orientation: 'Landscape',
+                                            margin: { bottom: 20, top: 30 } )
+    
+      
+      binding.pry
+
+      file_name = "12112.pdf"
+      path = "/home/alo-abdullahalmuzaki/"
+      unless File.directory?(path)
+          FileUtils.mkdir_p(path)
+      end
+      file_path = path + file_name
+      File.open(file_path, 'wb'){|file| file << pdf }
+    end
 end

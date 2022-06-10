@@ -129,17 +129,8 @@ class OrdersController < ApplicationController
 
   def create_pdf
     @order = Order.first
-    export()
-    respond_to do |format|
-      format.html
-      format.pdf do
-        
-        binding.pry
-        
-        # render pdf: "file_name", template: "orders/show.html.erb"   # Excluding ".pdf" extension.
-        render save_to_file:                   Rails.root.join('pdfs', "foo.pdf")
-      end
-    end
+    url_path = export()
+    render :json => { path: url_path }
   end
 
   private
@@ -197,7 +188,8 @@ class OrdersController < ApplicationController
       file_path = path + file_name
       File.open(file_path, 'wb'){|file| file << pdf }
 
-      Cloudinary::Uploader.upload("/tmp/sample.pdf")
+      response = Cloudinary::Uploader.upload("/tmp/sample.pdf")
       File.delete(file_path) if File.exist?(file_path)
+      response['secure_url']
     end
 end

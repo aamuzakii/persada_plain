@@ -1,10 +1,101 @@
-<p style="color: green"><%= notice %></p>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+</style>
 
-<%= render @order %>
+<!-- start email container -->
+<div class="email_body" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;width: 100%;height: 100%;">
+  <div class="email_container" style="box-sizing: border-box;margin: 0 auto;padding: 16px;border: 0;font-size: 16px;font-family: 'Lato', sans-serif, arial;width: 100%;min-width: 495px;color: #7f7f7f;line-height: 28px;background-color: #ffffff;word-break: break-word;">
 
-<div>
-  <%= link_to "Edit this order", edit_order_path(@order) %> |
-  <%= link_to "Back to orders", orders_path %>
+    <div class="email_header mb_16" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;border-bottom: solid 2px #3570d2;display: table;width: 100%;padding-bottom: 16px;margin-bottom: 16px;">
+      <div class="header_col_8" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;">
+        <img src="https://res.cloudinary.com/dk0z4ums3/image/upload/v1603696808/setting/1603696807.png" alt="alodokter" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;vertical-align: top;max-width: 200px;display: inline-block;">
+      </div>
+      <div class="header_col_4" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;margin-left: auto;text-align: right;">
+        <img src="http://res.cloudinary.com/dk0z4ums3/image/upload/v1603256765/setting/1603256764.png" alt="alodokter" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;max-width: 32px;vertical-align: top;display: inline-block;">
+      </div>
+    </div>
 
-  <%= button_to "Destroy this order", @order, method: :delete %>
+    <div style="display: flex; justify-content: space-between " >
+        <div>
+      <div class="email_row mb_6" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table;width: 100%;margin-bottom: 6px;">
+        <p class="col_4 color_424242 font_weight_700" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;width: 32%;color: #424242;font-weight: 300;">
+          +62838 9458 8105
+        </p>
+      </div>
+      <div class="email_row" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table;width: 100%;">
+        <p class="col_4 color_424242 font_weight_700" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;width: 32%;color: #424242;font-weight: 700;">
+          Ditagih ke:
+        </p>
+      </div>
+      <div class="email_row" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table;width: 100%;">
+        <p class="col_4 color_424242 font_weight_700" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;width: 32%;color: #424242;font-weight: 700;">
+          Abdullah Al Muzaki
+        </p>
+      </div>
+      <div class="email_row" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table;width: 100%;">
+        <p class="col_4 color_424242 font_weight_700" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;width: 32%;color: #424242;font-weight: 300;">
+          Jl. Garu 3 no 3, Babakan Sari Kiaracondong, Bandung
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <div class="email_row mb_6" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table;width: 100%;margin-bottom: 6px;">
+        <p class="col_4 color_424242 font_weight_700" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;width: 32%;color: #424242;font-weight: 300;">
+          +62838 9458 8105
+        </p>
+      </div>
+      <div class="email_row" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table;width: 100%;">
+        <p class="col_4 color_424242 font_weight_700" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;width: 32%;color: #424242;font-weight: 700;">
+          Ditagih ke:
+        </p>
+      </div>
+      <div class="email_row" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table;width: 100%;">
+        <p class="col_4 color_424242 font_weight_700" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;width: 32%;color: #424242;font-weight: 700;">
+          Abdullah Al Muzaki
+        </p>
+      </div>
+    </div>
+    </div>
+
+
+
+
+
+    <hr style="box-sizing: border-box;margin-top: 16px;margin-bottom: 16px;border: 0;border-top: 1px solid #3570d2;font-family: 'Lato', sans-serif, arial;line-height: 28px;">
+
+    <div class="email_row mb_6" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table;width: 100%;margin-bottom: 6px;">
+      <p class="col_4 color_424242 font_weight_700" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;width: 32%;color: #424242;font-weight: 700;">
+        Produk
+      </p>
+      <p class="col_4 color_424242 font_weight_700" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;width: 32%;color: #424242;font-weight: 700;">
+        Kuantitas
+      </p>
+      <p class="col_4 color_424242 font_weight_700" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;width: 32%;color: #424242;font-weight: 700;">
+        Harga Satuan
+      </p>
+      <p class="col_4 color_424242 font_weight_700" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;width: 32%;color: #424242;font-weight: 700;">
+        Jumlah
+      </p>
+    </div>
+    <hr style="box-sizing: border-box;margin-top: 16px;margin-bottom: 16px;border: 0;border-top: 1px solid #3570d2;font-family: 'Lato', sans-serif, arial;line-height: 28px;">
+
+    <div class="email_row mb_6" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table;width: 100%;margin-bottom: 6px;">
+      <p class="col_4 color_424242 font_weight_700" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;width: 32%;color: #424242;font-weight: 300;">
+        Motor
+      </p>
+      <p class="col_4 color_424242 font_weight_300" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;width: 32%;color: #424242;font-weight: 300;">
+        2
+      </p>
+      <p class="col_4 color_424242 font_weight_300" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;width: 32%;color: #424242;font-weight: 300;">
+        Rp. 10.000
+      </p>
+      <p class="col_4 color_424242 font_weight_300" style="box-sizing: border-box;margin: 0;padding: 0;border: 0;font-size: inherit;font-family: 'Lato', sans-serif, arial;line-height: 28px;display: table-cell;width: 32%;color: #424242;font-weight: 300;">
+        Rp.20.000
+      </p>
+    </div>
+  </div>
 </div>
+<!-- end email container -->

@@ -2,7 +2,6 @@ class OrdersController < ApplicationController
   before_action :set_order, only: %i[ show edit update destroy ]
   before_action :authorize_request, except: []
 
-  # GET /orders or /orders.json
   def index
     @orders = Order.all
     # render :json => @orders
@@ -131,6 +130,12 @@ class OrdersController < ApplicationController
     @order = Order.first
     url_path = export()
     render :json => { path: url_path }
+    # respond_to do |format|
+    #   format.html
+    #   format.pdf do
+    #     render pdf: "file_name", template: "orders/foo", formats: [:html]
+    #   end
+    # end  # use this for designing layout
   end
 
   private
@@ -174,6 +179,7 @@ class OrdersController < ApplicationController
     def export
     
       body_html   = render_to_string( template: "orders/pdf_template" )
+      # body_html   = render_to_string( template: "orders/foo" ) # use this to check design/ layout
     
       pdf = WickedPdf.new.pdf_from_string( body_html,
                                             orientation: 'Landscape',

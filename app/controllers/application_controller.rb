@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
   def authorize_request
     token = request.headers["Authorization"]
     begin
-      decoded_token = JWT.decode(token, ENV['HMAC_SECRET'], true, { algorithm: 'HS256' })
-      @current_user = Customer.find(decoded[:user_id])
+      decoded = JWT.decode(token, ENV['HMAC_SECRET'], true, { algorithm: 'HS256' })
+      @current_user = Customer.find(decoded.first['user_id'])
     rescue
     end
   end

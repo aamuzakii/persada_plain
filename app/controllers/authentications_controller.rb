@@ -61,7 +61,7 @@ class AuthenticationsController < ApplicationController
   private
 
   def generate_token(user_id)
-    token = JsonWebToken.encode(user_id: user_id)
+    token = JWT.encode({user_id: user_id}, ENV['HMAC_SECRET'], 'HS256')
   end
 
   def give_access(customer)

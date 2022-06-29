@@ -11,15 +11,18 @@ class AuthenticationsController < ApplicationController
 
   def request_otp
     
-    if ['000','111','6283894588105'].include?(params['phone'])
-      
-      customer = Customer.find_by(phone: params['phone']) # harusnya find_or_create ga sih
-      token = generate_token(customer.id.to_s)
-      exp = Time.now + 6.months.to_i
-      render json: { token: token, exp: exp.strftime("%m-%d-%Y %H:%M"), username: customer.name }, status: :ok
-    else
-      # send message via Vonage
+    otp_code = ''
+    [1,2,3,4].each do |single|
+      otp_code += rand(9).to_s
     end
+    otp = Otp.new({ phone_number: '62' + params[:phone], otp_code: otp_code })
+    if otp.save
+      uri = "http://localhost:9500/otp?number=#{params[:phone]}&otp=#{otp.otp_code}"
+      response = HTTParty.get(uri)
+    else
+      message = 'failed to send OTP'
+    end
+    render json: { message: 'OTP sent' }, status: :ok
   end
 
   def google_login

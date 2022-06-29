@@ -4,9 +4,26 @@ class AuthenticationsController < ApplicationController
   require 'json_web_token'
 
   def post_otp
-    token = JsonWebToken.encode(user_id: "this-is-use-id")
-    time = Time.now + 6.months.to_i
-    render json: { token: token, exp: time.strftime("%m-%d-%Y %H:%M"), username: "my username" }, status: :ok
+    sanitized_phone = params[:phone]
+    complete_phone = '62' + sanitized_phone
+    correct_otp = Otp.where(phone_number: complete_phone).last.otp_code
+    if params[:otpCode] == correct_otp
+      customer = Customer.find_by(phone: complete_phone)
+      if customer.present?
+        puts "existing phone"
+        give_access(customer)
+      else
+        puts "new phone"
+        customer = Customer.new({
+          phone: complete_phone
+        })
+        customer.save
+        puts "giving access.."
+        give_access(customer)
+      end
+    else
+      render json: { status: 403, message: 'wrong OTP' }, status: :ok
+    end
   end
 
   def request_otp
@@ -19,6 +36,7 @@ class AuthenticationsController < ApplicationController
     if otp.save
       uri = "http://localhost:9500/otp?number=#{params[:phone]}&otp=#{otp.otp_code}"
       response = HTTParty.get(uri)
+      puts response
     else
       message = 'failed to send OTP'
     end
@@ -70,7 +88,7 @@ class AuthenticationsController < ApplicationController
   def give_access(customer)
     token = generate_token(customer.id.to_s)
     exp = Time.now + 6.months.to_i
-    render json: { token: token, exp: exp.strftime("%m-%d-%Y %H:%M"), username: customer.name }, status: :ok
+    render json: { token: token, exp: exp.strftime("%m-%d-%Y %H:%M"), username: customer.name, status: 200 }, status: :ok
   end
 
 end

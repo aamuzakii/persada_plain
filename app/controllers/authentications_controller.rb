@@ -36,7 +36,7 @@ class AuthenticationsController < ApplicationController
     if otp.save
       uri = "http://localhost:9500/otp?number=#{params[:phone]}&otp=#{otp.otp_code}"
       response = HTTParty.get(uri)
-      puts response
+      Rails.logger.info "=======================#{response}"
     else
       message = 'failed to send OTP'
     end

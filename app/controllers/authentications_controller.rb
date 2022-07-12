@@ -78,6 +78,29 @@ class AuthenticationsController < ApplicationController
     end
   end
   
+  def firebase_otp_verification
+    url = "https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=AIzaSyDZtoTu4OFuusGtGvTr-Dhv_jIjf--043s"
+    firebase_verification_call = HTTParty.post(url, headers: { 'Content-Type' => 'application/json' }, body: { 'idToken' => params['_tokenResponse']['idToken'] }.to_json )
+    if firebase_verification_call.response.code == "200"
+      firebase_infos = firebase_verification_call.parsed_response
+      complete_phone = firebase_infos['users'].first['phoneNumber']
+      customer = Customer.find_by(phone: complete_phone)
+      if customer.present?
+        puts "existing phone"
+        give_access(customer)
+      else
+        puts "new phone"
+        customer = Customer.new({
+          phone: complete_phone
+        })
+        customer.save
+        puts "giving access.."
+        give_access(customer)
+      end
+    else
+      render json: { status: 403, message: 'Firebase id token not verified' }, status: :ok
+    end
+  end
 
   private
 

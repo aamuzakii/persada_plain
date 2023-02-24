@@ -15,6 +15,7 @@ COPY . .
 
 # Set Rails environment variable
 ENV RAILS_ENV=production
+EXPOSE 3000
 
 # Precompile assets
 RUN bundle exec rails assets:precompile

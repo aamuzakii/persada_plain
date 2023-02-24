@@ -49,6 +49,7 @@ gem 'wkhtmltopdf-binary'
 gem 'wicked_pdf'
 gem 'cloudinary'
 gem 'httparty'
+gem 'tzinfo-data'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
